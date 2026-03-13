@@ -22,11 +22,24 @@ import Swift
 //===----------------------------------------------------------------------===//
 
 /// Returns `x` like an identity function. When used in a context where `x` is
-/// being differentiated with respect to, this function will not produce any
+/// being differentiated with respect to, this function will not produce any 
 /// derivative at `x`.
 @inlinable
 @inline(__always)
 @_semantics("autodiff.nonvarying")
 public func withoutDerivative<T>(at x: T) -> T {
   x
+}
+
+//===----------------------------------------------------------------------===//
+// Diagnostics
+//===----------------------------------------------------------------------===//
+
+@_silgen_name("_fatalErrorForwardModeDifferentiationDisabled")
+public func _fatalErrorForwardModeDifferentiationDisabled() -> Never {
+  fatalError("""
+    JVP does not exist. Use \
+    '-Xfrontend -enable-experimental-forward-mode-differentiation' to enable \
+    differential-first differentiation APIs.
+    """)
 }

@@ -21,7 +21,7 @@ import Swift
 // Protocol conformances
 //===----------------------------------------------------------------------===//
 
-extension SIMD2: AdditiveArithmetic where Scalar: FloatingPoint {}
+extension SIMD2: @retroactive AdditiveArithmetic where Scalar: FloatingPoint {}
 
 extension SIMD2: Differentiable
 where
@@ -83,7 +83,7 @@ where
 // Protocol conformances
 //===----------------------------------------------------------------------===//
 
-extension SIMD4: AdditiveArithmetic where Scalar: FloatingPoint {}
+extension SIMD4: @retroactive AdditiveArithmetic where Scalar: FloatingPoint {}
 
 extension SIMD4: Differentiable
 where
@@ -145,7 +145,7 @@ where
 // Protocol conformances
 //===----------------------------------------------------------------------===//
 
-extension SIMD8: AdditiveArithmetic where Scalar: FloatingPoint {}
+extension SIMD8: @retroactive AdditiveArithmetic where Scalar: FloatingPoint {}
 
 extension SIMD8: Differentiable
 where
@@ -207,7 +207,7 @@ where
 // Protocol conformances
 //===----------------------------------------------------------------------===//
 
-extension SIMD16: AdditiveArithmetic where Scalar: FloatingPoint {}
+extension SIMD16: @retroactive AdditiveArithmetic where Scalar: FloatingPoint {}
 
 extension SIMD16: Differentiable
 where
@@ -269,7 +269,7 @@ where
 // Protocol conformances
 //===----------------------------------------------------------------------===//
 
-extension SIMD32: AdditiveArithmetic where Scalar: FloatingPoint {}
+extension SIMD32: @retroactive AdditiveArithmetic where Scalar: FloatingPoint {}
 
 extension SIMD32: Differentiable
 where
@@ -331,7 +331,7 @@ where
 // Protocol conformances
 //===----------------------------------------------------------------------===//
 
-extension SIMD64: AdditiveArithmetic where Scalar: FloatingPoint {}
+extension SIMD64: @retroactive AdditiveArithmetic where Scalar: FloatingPoint {}
 
 extension SIMD64: Differentiable
 where
@@ -393,7 +393,7 @@ where
 // Protocol conformances
 //===----------------------------------------------------------------------===//
 
-extension SIMD3: AdditiveArithmetic where Scalar: FloatingPoint {}
+extension SIMD3: @retroactive AdditiveArithmetic where Scalar: FloatingPoint {}
 
 extension SIMD3: Differentiable
 where
@@ -775,9 +775,6 @@ where
   }
 }
 
-// FIXME(TF-1103): Derivative registration does not yet support
-// `@_alwaysEmitIntoClient` original functions like `SIMD.sum()`.
-/*
 extension SIMD
 where
   Self: Differentiable,
@@ -787,6 +784,7 @@ where
   TangentVector == Self
 {
   @inlinable
+  @_alwaysEmitIntoClient
   @derivative(of: sum)
   func _vjpSum() -> (
     value: Scalar, pullback: (Scalar.TangentVector) -> TangentVector
@@ -795,6 +793,7 @@ where
   }
 
   @inlinable
+  @_alwaysEmitIntoClient
   @derivative(of: sum)
   func _jvpSum() -> (
     value: Scalar, differential: (TangentVector) -> Scalar.TangentVector
@@ -802,7 +801,6 @@ where
     return (sum(), { v in Scalar.TangentVector(v.sum()) })
   }
 }
-*/
 
 extension SIMD
 where
@@ -827,3 +825,286 @@ where
     return (Self(repeating: value), { v in Self(repeating: v) })
   }
 }
+/*
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD2 where Scalar == Float {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD4 where Scalar == Float {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD8 where Scalar == Float {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD16 where Scalar == Float {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD32 where Scalar == Float {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD64 where Scalar == Float {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD3 where Scalar == Float {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD2 where Scalar == Double {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD4 where Scalar == Double {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD8 where Scalar == Double {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD16 where Scalar == Double {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD32 where Scalar == Double {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD64 where Scalar == Double {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 461)
+extension SIMD3 where Scalar == Double {
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _vjpInit(repeating value: Scalar)
+    -> (value: Self, pullback: (TangentVector) -> Scalar.TangentVector)
+  {
+    return (Self(repeating: value), { v in v.sum() })
+  }
+
+  @inlinable
+  @_alwaysEmitIntoClient
+  @derivative(of: init(repeating:))
+  static func _jvpInit(repeating value: Scalar)
+    -> (value: Self, differential: (Scalar.TangentVector) -> TangentVector)
+  {
+    return (Self(repeating: value), { v in Self(repeating: v) })
+  }
+}
+#sourceLocation(file: "../gyb-sources/SIMDDifferentiation.swift.gyb", line: 482)
+*/

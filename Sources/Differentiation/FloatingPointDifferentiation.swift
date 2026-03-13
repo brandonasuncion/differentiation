@@ -30,6 +30,7 @@ extension Float16: Differentiable {
   public typealias TangentVector = Float16
 
   @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  @inlinable
   public mutating func move(by offset: TangentVector) {
     self += offset
   }
@@ -39,10 +40,113 @@ extension Float16: Differentiable {
 // Derivatives
 //===----------------------------------------------------------------------===//
 
+/// Derivatives of constructors.
+@available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+extension Float16 {
+
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 69)
+  #if !os(macOS) && !(os(iOS) && targetEnvironment(macCatalyst))
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Float16)
+  -> (value: Float16, pullback: (Float16) -> Float16) {
+    return (value: Float16(x), pullback: { v in Float16(v) })
+  }
+  
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Float16)
+  -> (value: Float16, differential: (Float16) -> Float16) {
+    return (value: Float16(x), differential: { dx in Float16(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 91)
+  #endif
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Float)
+  -> (value: Float16, pullback: (Float16) -> Float) {
+    return (value: Float16(x), pullback: { v in Float(v) })
+  }
+  
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Float)
+  -> (value: Float16, differential: (Float) -> Float16) {
+    return (value: Float16(x), differential: { dx in Float16(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Double)
+  -> (value: Float16, pullback: (Float16) -> Double) {
+    return (value: Float16(x), pullback: { v in Double(v) })
+  }
+  
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Double)
+  -> (value: Float16, differential: (Double) -> Float16) {
+    return (value: Float16(x), differential: { dx in Float16(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 66)
+  #if !(os(Windows) || os(Android) || $Embedded) && (arch(i386) || arch(x86_64))
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Float80)
+  -> (value: Float16, pullback: (Float16) -> Float80) {
+    return (value: Float16(x), pullback: { v in Float80(v) })
+  }
+  
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Float80)
+  -> (value: Float16, differential: (Float80) -> Float16) {
+    return (value: Float16(x), differential: { dx in Float16(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 91)
+  #endif
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 94)
+}
+
 /// Derivatives of standard unary operators.
 @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Float16 {
-  @usableFromInline
+  @inlinable
   @_transparent
   @derivative(of: -)
   static func _vjpNegate(x: Float16)
@@ -50,7 +154,7 @@ extension Float16 {
     return (-x, { v in -v })
   }
 
-  @usableFromInline
+  @inlinable
   @_transparent
   @derivative(of: -)
   static func _jvpNegate(x: Float16)
@@ -241,7 +345,7 @@ extension Float16 {
   }
 }
 
-#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 257)
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 299)
 #endif
 #sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 27)
 
@@ -257,6 +361,7 @@ extension Float: Differentiable {
   public typealias TangentVector = Float
 
   
+  @inlinable
   public mutating func move(by offset: TangentVector) {
     self += offset
   }
@@ -266,10 +371,113 @@ extension Float: Differentiable {
 // Derivatives
 //===----------------------------------------------------------------------===//
 
+/// Derivatives of constructors.
+
+extension Float {
+
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 69)
+  #if !os(macOS) && !(os(iOS) && targetEnvironment(macCatalyst))
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Float16)
+  -> (value: Float, pullback: (Float) -> Float16) {
+    return (value: Float(x), pullback: { v in Float16(v) })
+  }
+  
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Float16)
+  -> (value: Float, differential: (Float16) -> Float) {
+    return (value: Float(x), differential: { dx in Float(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 91)
+  #endif
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Float)
+  -> (value: Float, pullback: (Float) -> Float) {
+    return (value: Float(x), pullback: { v in Float(v) })
+  }
+  
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Float)
+  -> (value: Float, differential: (Float) -> Float) {
+    return (value: Float(x), differential: { dx in Float(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Double)
+  -> (value: Float, pullback: (Float) -> Double) {
+    return (value: Float(x), pullback: { v in Double(v) })
+  }
+  
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Double)
+  -> (value: Float, differential: (Double) -> Float) {
+    return (value: Float(x), differential: { dx in Float(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 66)
+  #if !(os(Windows) || os(Android) || $Embedded) && (arch(i386) || arch(x86_64))
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Float80)
+  -> (value: Float, pullback: (Float) -> Float80) {
+    return (value: Float(x), pullback: { v in Float80(v) })
+  }
+  
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Float80)
+  -> (value: Float, differential: (Float80) -> Float) {
+    return (value: Float(x), differential: { dx in Float(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 91)
+  #endif
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 94)
+}
+
 /// Derivatives of standard unary operators.
 
 extension Float {
-  @usableFromInline
+  @inlinable
   @_transparent
   @derivative(of: -)
   static func _vjpNegate(x: Float)
@@ -277,7 +485,7 @@ extension Float {
     return (-x, { v in -v })
   }
 
-  @usableFromInline
+  @inlinable
   @_transparent
   @derivative(of: -)
   static func _jvpNegate(x: Float)
@@ -482,6 +690,7 @@ extension Double: Differentiable {
   public typealias TangentVector = Double
 
   
+  @inlinable
   public mutating func move(by offset: TangentVector) {
     self += offset
   }
@@ -491,10 +700,113 @@ extension Double: Differentiable {
 // Derivatives
 //===----------------------------------------------------------------------===//
 
+/// Derivatives of constructors.
+
+extension Double {
+
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 69)
+  #if !os(macOS) && !(os(iOS) && targetEnvironment(macCatalyst))
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Float16)
+  -> (value: Double, pullback: (Double) -> Float16) {
+    return (value: Double(x), pullback: { v in Float16(v) })
+  }
+  
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Float16)
+  -> (value: Double, differential: (Float16) -> Double) {
+    return (value: Double(x), differential: { dx in Double(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 91)
+  #endif
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Float)
+  -> (value: Double, pullback: (Double) -> Float) {
+    return (value: Double(x), pullback: { v in Float(v) })
+  }
+  
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Float)
+  -> (value: Double, differential: (Float) -> Double) {
+    return (value: Double(x), differential: { dx in Double(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Double)
+  -> (value: Double, pullback: (Double) -> Double) {
+    return (value: Double(x), pullback: { v in Double(v) })
+  }
+  
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Double)
+  -> (value: Double, differential: (Double) -> Double) {
+    return (value: Double(x), differential: { dx in Double(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 66)
+  #if !(os(Windows) || os(Android) || $Embedded) && (arch(i386) || arch(x86_64))
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Float80)
+  -> (value: Double, pullback: (Double) -> Float80) {
+    return (value: Double(x), pullback: { v in Float80(v) })
+  }
+  
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Float80)
+  -> (value: Double, differential: (Float80) -> Double) {
+    return (value: Double(x), differential: { dx in Double(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 91)
+  #endif
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 94)
+}
+
 /// Derivatives of standard unary operators.
 
 extension Double {
-  @usableFromInline
+  @inlinable
   @_transparent
   @derivative(of: -)
   static func _vjpNegate(x: Double)
@@ -502,7 +814,7 @@ extension Double {
     return (-x, { v in -v })
   }
 
-  @usableFromInline
+  @inlinable
   @_transparent
   @derivative(of: -)
   static func _jvpNegate(x: Double)
@@ -696,7 +1008,7 @@ extension Double {
 #sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 27)
 
 #sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 29)
-#if !(os(Windows) || os(Android)) && (arch(i386) || arch(x86_64))
+#if !(os(Windows) || os(Android) || ($Embedded && !os(Linux) && !(os(macOS) || os(iOS) || os(watchOS) || os(tvOS)))) && (arch(i386) || arch(x86_64))
 #sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 34)
 
 //===----------------------------------------------------------------------===//
@@ -709,6 +1021,7 @@ extension Float80: Differentiable {
   public typealias TangentVector = Float80
 
   
+  @inlinable
   public mutating func move(by offset: TangentVector) {
     self += offset
   }
@@ -718,10 +1031,113 @@ extension Float80: Differentiable {
 // Derivatives
 //===----------------------------------------------------------------------===//
 
+/// Derivatives of constructors.
+
+extension Float80 {
+
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 69)
+  #if !os(macOS) && !(os(iOS) && targetEnvironment(macCatalyst))
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Float16)
+  -> (value: Float80, pullback: (Float80) -> Float16) {
+    return (value: Float80(x), pullback: { v in Float16(v) })
+  }
+  
+  @available(iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Float16)
+  -> (value: Float80, differential: (Float16) -> Float80) {
+    return (value: Float80(x), differential: { dx in Float80(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 91)
+  #endif
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Float)
+  -> (value: Float80, pullback: (Float80) -> Float) {
+    return (value: Float80(x), pullback: { v in Float(v) })
+  }
+  
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Float)
+  -> (value: Float80, differential: (Float) -> Float80) {
+    return (value: Float80(x), differential: { dx in Float80(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Double)
+  -> (value: Float80, pullback: (Float80) -> Double) {
+    return (value: Float80(x), pullback: { v in Double(v) })
+  }
+  
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Double)
+  -> (value: Float80, differential: (Double) -> Float80) {
+    return (value: Float80(x), differential: { dx in Float80(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 64)
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 66)
+  #if !(os(Windows) || os(Android) || $Embedded) && (arch(i386) || arch(x86_64))
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 71)
+
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _vjpInit(x: Float80)
+  -> (value: Float80, pullback: (Float80) -> Float80) {
+    return (value: Float80(x), pullback: { v in Float80(v) })
+  }
+  
+  
+  @inlinable
+  @_transparent
+  @derivative(of: init(_:))
+  static func _jvpInit(x: Float80)
+  -> (value: Float80, differential: (Float80) -> Float80) {
+    return (value: Float80(x), differential: { dx in Float80(dx) })
+  }
+  
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 91)
+  #endif
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 94)
+}
+
 /// Derivatives of standard unary operators.
 
 extension Float80 {
-  @usableFromInline
+  @inlinable
   @_transparent
   @derivative(of: -)
   static func _vjpNegate(x: Float80)
@@ -729,7 +1145,7 @@ extension Float80 {
     return (-x, { v in -v })
   }
 
-  @usableFromInline
+  @inlinable
   @_transparent
   @derivative(of: -)
   static func _jvpNegate(x: Float80)
@@ -920,9 +1336,9 @@ extension Float80 {
   }
 }
 
-#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 257)
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 299)
 #endif
-#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 260)
+#sourceLocation(file: "../gyb-sources/FloatingPointDifferentiation.swift.gyb", line: 302)
 
 extension FloatingPoint
 where
@@ -934,7 +1350,7 @@ where
   func _vjpAddingProduct(
     _ lhs: Self, _ rhs: Self
   ) -> (value: Self, pullback: (Self) -> (Self, Self, Self)) {
-    return (addingProduct(lhs, rhs), { _ in (1, rhs, lhs) })
+    return (addingProduct(lhs, rhs), { v in (v, v * rhs, v * lhs) })
   }
 
   @inlinable // FIXME(sil-serialize-all)
